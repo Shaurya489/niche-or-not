@@ -9,8 +9,9 @@ def get_anime_data(anime_name):
             features={
                 "title":anime_info.get("title"),
                 "score":anime_info.get("score"),
-                "members":anime_info.get("members"),
-                "popularity_rank":anime_info.get("popularity")
+                "engagement":anime_info.get("members"),
+                "popularity_rank":anime_info.get("popularity"),
+                "media_type":"anime"
             }
             return features
         else:
