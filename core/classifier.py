@@ -14,7 +14,14 @@ def classify_media(data):
         else:
             return "Niche"
     elif media_type=="movie":
-        pass
+        if(engagement>=30000):
+            return "Mainstream"
+        elif(10000<=engagement<20000):
+            return "Popular"
+        elif(1000<=engagement<10000):
+            return "LesserKnown"
+        else:
+            return "Niche"
     elif media_type=="game":
         pass
     else:
@@ -22,9 +29,9 @@ def classify_media(data):
     
     
 if(__name__=="__main__"):
-    from data_fetchers.anime_api import get_anime_data
+    from data_fetchers.movie_api import get_movie_data
     
-    live_data=get_anime_data("Gintama")
+    live_data=get_movie_data("Top Gun")
     
     print(f"Data:{live_data}")
     print(f"Verdict:{classify_media(live_data)}")

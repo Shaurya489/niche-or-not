@@ -1,27 +1,36 @@
 import requests
+import  os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 def get_movie_data(movie_name):
-    url = f"https://api.jikan.moe/v4/anime?q={anime_name}&limit=1"
-    response=requests.get(url)
+    token=os.getenv("TMDB_API_KEY")
+    url=f"https://api.themoviedb.org/3/search/movie"
+    params={
+        "api_key":token,
+        "query":movie_name
+    }
+    response=requests.get(url,params=params)
     if(response.status_code==200):
         data=response.json()
-        if(data['data']):
-            anime_info=data['data'][0]
+        if(data['results']):
+            movie_info=data['results'][0]
             features={
-                "title":anime_info.get("title"),
-                "score":anime_info.get("score"),
-                "engagement":anime_info.get("members"),
-                "popularity_rank":anime_info.get("popularity"),
-                "media_type":"anime"
+                "title":movie_info.get("title"),
+                "score":movie_info.get("vote_average"),
+                "engagement":movie_info.get("vote_count"),
+                "media_type":"movie"
             }
             return features
         else:
-            return {"error":"Anime not found"}
+            return {"error":"Movie not found"}
     else:
         return {"error": f"API request failed with status code {response.status_code}"}
     
 if __name__ == "__main__":
-    print("Testing a mainstream anime:")
-    print(get_anime_data("Naruto"))
+    print("Testing a mainstream movie:")
+    print(get_movie_data("Inception"))
     
-    print("\nTesting a more niche anime:")
-    print(get_anime_data("Gintama"))
+    print("\nTesting a more niche movie:")
+    print(get_movie_data("Top Gun"))

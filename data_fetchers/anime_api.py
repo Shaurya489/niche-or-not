@@ -24,4 +24,4 @@ if __name__ == "__main__":
     print(get_anime_data("Naruto"))
     
     print("\nTesting a more niche anime:")
-    print(get_anime_data("Gintama"))
+    print(get_anime_data("Jujutsu Kaisen"))
