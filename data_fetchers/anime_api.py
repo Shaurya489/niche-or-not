@@ -1,11 +1,12 @@
 import requests
 def get_anime_data(anime_name):
-    url = f"https://api.jikan.moe/v4/anime?q={anime_name}&limit=1"
+    url = f"https://api.jikan.moe/v4/anime?q={anime_name}&limit=10"
     response=requests.get(url)
     if(response.status_code==200):
         data=response.json()
         if(data['data']):
-            anime_info=data['data'][0]
+            anime_info=max(data['data'],key=lambda x:x.get('members',0))
+            
             features={
                 "title":anime_info.get("title"),
                 "image":anime_info.get("images").get("jpg").get("large_image_url"),

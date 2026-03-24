@@ -22,7 +22,43 @@ if(st.button("Check Niche-ness")):
             
         elif(media_type=="TV Show"):
             data=get_show_data(search_term)
-        if "error" not in data:      
+        if "error" not in data:     
+            st.markdown(f"""
+                        <style>
+                        .stApp{{
+                            background:transparent;
+                        }}
+                        @keyframes fadeIn{{
+                            0% {{ opacity:0;}}
+                            100% {{ opacity:1}}
+                        }}
+                        
+                        .popout-bg{{
+                            position:fixed;
+                            top:0;
+                            left:0;
+                            width:100vw;
+                            height:100vh;
+                            background-image:url('{data["image"]}');
+                            background-size:cover;
+                            background-position:center;
+                            filter:blur(20px) brightness(0.4);
+                            z-index:-1;
+                            animation:fadeIn 0.8s ease-in-out;
+                        }}
+                        
+                        .main-content{{
+                            animation:fadeIn 1.2s ease-in-out;
+                        }}
+                        h1,h2,h3,p{{
+                            color: #f0f0f0;
+                            text-shadow:2px 2px 4px rgba(0,0,0,0.5);
+                        }}
+                        
+                        </style>
+                        <div class="popout-bg"></div>
+                        
+                        """,unsafe_allow_html=True) 
             verdict=(classify_media(data))
             col1,col2=st.columns([1,2])
             
@@ -40,5 +76,8 @@ if(st.button("Check Niche-ness")):
     else:
         st.warning("Please enter something")
 
-    
+with st.sidebar:
+    st.write("Made by Shaurya Pratap Singh")
+    st.write("Contact : shauryapratapsingh489@gmail.com")
+    st.write("Used TMDB and Jikan APIs")
 
