@@ -10,15 +10,27 @@ st.write("Is your taste truly niche like you claim?")
 media_type=st.selectbox("What are you looking for?",["Anime","Movie"])
 
 search_term=st.text_input(f"Enter the name of the {media_type}:")
-
+data={}
 if(st.button("Check Niche-ness")):
     if search_term:
         if(media_type=="Anime"):
             data=get_anime_data(search_term)
-            st.write(classify_media(data))
+            
         elif(media_type=="Movie"):
             data=get_movie_data(search_term)
-            st.write(classify_media(data))
     else:
-        st.warning("Please choose one media type")
+        st.warning("Please enter something")
+        
+verdict=(classify_media(data))
+if(verdict=="Mainstream"):
+    st.write("Your choice is highly popular!")
+
+elif (verdict=="Popular"):
+    st.write("Your choice is popular")
+    
+elif(verdict=="LesserKnown"):
+    st.write("Your choice is lesser known")
+    
+elif(verdict=="Niche"):
+    st.write("Your choice is Niche. Congrats you won.")
 
