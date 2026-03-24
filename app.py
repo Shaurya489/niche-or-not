@@ -1,13 +1,14 @@
 import streamlit as st
 from data_fetchers.anime_api import get_anime_data
 from data_fetchers.movie_api import get_movie_data
+from data_fetchers.movie_api import get_show_data
 from core.classifier import classify_media
 
 st.set_page_config(page_title="Niche or Not")
 st.title("Niche or Not")
 st.write("Is your taste truly niche like you claim?")
 
-media_type=st.selectbox("What are you looking for?",["Anime","Movie"])
+media_type=st.selectbox("What are you looking for?",["Anime","Movie","TV Show"])
 
 search_term=st.text_input(f"Enter the name of the {media_type}:")
 data={}
@@ -18,6 +19,9 @@ if(st.button("Check Niche-ness")):
             
         elif(media_type=="Movie"):
             data=get_movie_data(search_term)
+            
+        elif(media_type=="TV Show"):
+            data=get_show_data(search_term)
     else:
         st.warning("Please enter something")
         

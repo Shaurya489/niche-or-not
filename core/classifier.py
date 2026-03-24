@@ -22,8 +22,15 @@ def classify_media(data):
             return "LesserKnown"
         else:
             return "Niche"
-    elif media_type=="game":
-        pass
+    elif media_type=="show":
+        if(engagement>=15000):
+            return "Mainstream"
+        elif(7500<=engagement<15000):
+            return "Popular"
+        elif(2500<=engagement<7500):
+            return "LesserKnown"
+        else:
+            return "Niche"
     else:
         return "Unknown media type."
     
