@@ -22,19 +22,23 @@ if(st.button("Check Niche-ness")):
             
         elif(media_type=="TV Show"):
             data=get_show_data(search_term)
+        if "error" not in data:      
+            verdict=(classify_media(data))
+            col1,col2=st.columns([1,2])
+            
+            with col1:
+                if data.get("image"):
+                    st.image(data["image"],use_container_width=True)
+                else:
+                    st.write("No Image found")
+            with col2:
+                st.subheader(search_term)
+                st.write(f"Verdict : {verdict}")
+                st.write(f" Score: {data['score']}/10")
+        else:
+            st.write(f"Error!! {media_type} not found")
     else:
         st.warning("Please enter something")
-        
-verdict=(classify_media(data))
-if(verdict=="Mainstream"):
-    st.write("Your choice is highly popular!")
 
-elif (verdict=="Popular"):
-    st.write("Your choice is popular")
     
-elif(verdict=="LesserKnown"):
-    st.write("Your choice is lesser known")
-    
-elif(verdict=="Niche"):
-    st.write("Your choice is Niche. Congrats you won.")
 

@@ -16,8 +16,10 @@ def get_movie_data(movie_name):
         data=response.json()
         if(data['results']):
             movie_info=data['results'][0]
+            poster_path=movie_info.get("poster_path")
             features={
                 "title":movie_info.get("title"),
+                "image":f"https://image.tmdb.org/t/p/w500{poster_path}",
                 "score":movie_info.get("vote_average"),
                 "engagement":movie_info.get("vote_count"),
                 "media_type":"movie"
@@ -40,8 +42,10 @@ def get_show_data(show_name):
         data=response.json()
         if(data['results']):
             show_info=data['results'][0]
+            poster_path=show_info.get("poster_path")
             features={
                 "title":show_info.get("title"),
+                "image":f"https://image.tmdb.org/t/p/w500{poster_path}",
                 "score":show_info.get("vote_average"),
                 "engagement":show_info.get("vote_count"),
                 "media_type":"show"

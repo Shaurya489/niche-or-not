@@ -8,6 +8,7 @@ def get_anime_data(anime_name):
             anime_info=data['data'][0]
             features={
                 "title":anime_info.get("title"),
+                "image":anime_info.get("images").get("jpg").get("large_image_url"),
                 "score":anime_info.get("score"),
                 "engagement":anime_info.get("members"),
                 "popularity_rank":anime_info.get("popularity"),
