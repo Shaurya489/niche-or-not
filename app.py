@@ -68,7 +68,7 @@ if(st.button("Check Niche-ness")):
                 else:
                     st.write("No Image found")
             with col2:
-                st.subheader(search_term.title())
+                st.subheader(data['title'])
                 st.write(f"Verdict : {verdict}")
                 st.write(f" Score: {data['score']}/10")
         else:
