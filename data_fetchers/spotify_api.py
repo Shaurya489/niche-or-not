@@ -13,17 +13,17 @@ def get_artist_data(artist_name):
         results=data.get('results',{}).get('artistmatches',{}).get('artist',[])
         if(results):
             artist_info=results[0]
-            images=artist_info.get("image",[])
+            images=artist_info.get("image")
             image_url=images[-1].get("#text") if images else None
             features={
                 "title":artist_info.get("name"),
                 "image":image_url, 
-                "engagement":artist_info.get("listeners",0),
+                "engagement":int(artist_info.get("listeners",0)),
                 "media_type":"music"
             }
             return features
         else:
-            return {"error":"Movie not found"}
+            return {"error":"Artist not found"}
     else:
         return {"error": f"API request failed with status code {response.status_code}"}
    

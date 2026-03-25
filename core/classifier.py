@@ -31,9 +31,19 @@ def classify_media(data):
             return "Lesser Known"
         else:
             return "Niche"
+    
+    elif media_type=="music":
+        if(engagement>=2000000):
+            return "Mainstream"
+        elif(500000<=engagement<2000000):
+            return "Popular"
+        elif(100000<=engagement<500000):
+            return "Lesser Known"
+        else:
+            return "Niche"
+    
     else:
         return "Unknown media type."
-    
     
 if(__name__=="__main__"):
     from data_fetchers.movie_api import get_movie_data
