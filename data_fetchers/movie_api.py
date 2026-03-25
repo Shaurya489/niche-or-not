@@ -28,8 +28,7 @@ def get_movie_data(movie_name):
         else:
             return {"error":"Movie not found"}
     else:
-        return {"error": f"API request failed with status code {response.status_code}"}
-  
+        return {"error": f"API request failed with status code {response.status_code}"} 
 def get_show_data(show_name):
     token=os.getenv("TMDB_API_KEY")
     url=f"https://api.themoviedb.org/3/search/tv"
