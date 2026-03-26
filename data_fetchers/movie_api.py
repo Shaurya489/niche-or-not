@@ -43,7 +43,7 @@ def get_show_data(show_name):
             show_info=data['results'][0]
             poster_path=show_info.get("poster_path")
             features={
-                "title":show_info.get("title"),
+                "title":show_info.get("name"),
                 "image":f"https://image.tmdb.org/t/p/w500{poster_path}",
                 "score":show_info.get("vote_average"),
                 "engagement":show_info.get("vote_count"),
@@ -60,4 +60,4 @@ if __name__ == "__main__":
     print(get_movie_data("Inception"))
     
     print("\nTesting a more niche movie:")
-    print(get_movie_data("Top Gun"))
+    print(get_show_data("breaking bad"))
