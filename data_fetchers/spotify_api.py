@@ -32,4 +32,5 @@ if __name__ == "__main__":
     print(get_artist_data("Nirvana"))
     
     print("\nTesting a more niche movie:")
+    
     print(get_artist_data("Taylor swift"))
