@@ -43,6 +43,7 @@ if(st.button("Check Niche-ness")):
                             left:0;
                             width:100vw;
                             height:100vh;
+                            background-image:url('{data["image"]}');
                             background-size:cover;
                             background-position:center;
                             filter:blur(20px) brightness(0.4);
