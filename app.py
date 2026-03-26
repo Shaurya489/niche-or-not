@@ -68,7 +68,7 @@ if(st.button("Check Niche-ness")):
             
             with col1:
                 if data.get("image"):
-                    st.image(data["image"],use_container_width=True)
+                    st.image(data["image"],width='stretch')
                 else:
                     st.write("No Image found")
             with col2:
