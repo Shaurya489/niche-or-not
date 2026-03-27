@@ -79,7 +79,6 @@ if(st.button("Check Niche-ness")):
                 st.subheader(data['title'])
                 st.write(f"Verdict : {verdict}")
                 if(media_type=="Book"):
-                    st.write(f" Score: {data['score']}/5")
                     st.write(f"Author: {data['author']}")
                 if(media_type!="Artist/Band" and media_type!="Book"):
                     st.write(f" Score: {data['score']}/10")

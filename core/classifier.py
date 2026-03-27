@@ -42,11 +42,11 @@ def classify_media(data):
         else:
             return "Niche"
     elif media_type=="book":
-        if(engagement>=80):
+        if(engagement>=500):
             return "Mainstream"
-        elif(50<=engagement<80):
+        elif(300<=engagement<500):
             return "Popular"
-        elif(30<=engagement<50):
+        elif(100<=engagement<300):
             return "Lesser Known"
         else:
             return "Niche"
