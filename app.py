@@ -90,5 +90,5 @@ if(st.button("Check Niche-ness")):
 with st.sidebar:
     st.write("Made by Shaurya Pratap Singh")
     st.write("Contact : shauryapratapsingh489@gmail.com")
-    st.write("Used TMDB and Jikan APIs")
+    st.write("Used TMDB,Jikan,OpenLibrary,lastFM,Deezer APIs")
 

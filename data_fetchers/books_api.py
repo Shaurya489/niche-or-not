@@ -1,7 +1,7 @@
 import requests
 
 def get_book_data(book_name):
-    url=f"https://openlibrary.org/search.json?q={book_name.replace(' ', '+')}&limit=5"
+    url=f"https://openlibrary.org/search.json?q={book_name}&fields=cover_i,author_name,title,edition_count,want_to_read_count,already_read_count,ratings_count,ratings_average&limit=5"
     
     response=requests.get(url)
     
@@ -11,10 +11,10 @@ def get_book_data(book_name):
 
         if docs:
             book=max(docs, key=lambda x: (
-                    int(x.get('edition_count', 0))
+                    int(x.get('want_to_read_count', 0))+int(x.get('already_read_count', 0))+int(x.get('ratings_count', 0))
                 ))
             
-            ratings=book.get('edition_count',0)
+            ratings=book.get('want_to_read_count',0)+book.get('already_count',0)+book.get('ratings_count',0)
             
             
             
