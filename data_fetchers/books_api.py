@@ -1,11 +1,15 @@
 import requests
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def get_book_data(book_name):
     headers = {
         "User-Agent": "Mozilla/5.0"
     }
-    url=f"https://www.googleapis.com/books/v1/volumes?q=intitle:{book_name}"
+    api_key=os.getenv("BOOKS_API")
+    url=f"https://www.googleapis.com/books/v1/volumes?q=intitle:{book_name}&key={api_key}"
     response=requests.get(url,headers=headers)
     if(response.status_code==200):
         data=response.json()
