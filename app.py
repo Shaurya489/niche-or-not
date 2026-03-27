@@ -33,7 +33,7 @@ if(st.button("Check Niche-ness")):
             data=get_book_data(search_term) 
             st.write("DEBUG:", data)
             if not os.getenv("BOOKS_API"):
-                st.error("DEBUG: The BOOKS_API key is NOT being read from Secrets!")
+                st.write("DEBUG: The BOOKS_API key is NOT being read from Secrets!")
         if "error" not in data:     
             st.markdown(f"""
                         <style>
