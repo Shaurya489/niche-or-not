@@ -21,8 +21,8 @@ def get_book_data(book_name):
             features={
                 "title":book_info.get("title"),
                 "image":images,
-                "engagement":book_info.get('ratingsCount',0),
-                "author":book_info.get('authors','')[0],
+                "engagement":int(book_info.get('ratingsCount',0)),
+                "author":book_info.get('authors',[])[0],
                 "score":book_info.get('averageRating',''),
                 "media_type":"book"
             }
