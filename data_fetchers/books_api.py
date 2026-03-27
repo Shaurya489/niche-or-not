@@ -5,40 +5,45 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def get_book_data(book_name):
+    api_key = os.getenv("BOOKS_API")
     headers = {
-         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept": "application/json"
+         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+         "Accept": "application/json"
     }
-    api_key=os.getenv("BOOKS_API")
     
-    url=f"https://www.googleapis.com/books/v1/volumes?q=intitle:{book_name}&key={api_key}"
-    response=requests.get(url,headers=headers)
-    if(response.status_code==200):
-        data=response.json()
-        results=data.get('items',[])
-        if(results):
-            best_match = max(results, key=lambda x: x.get('volumeInfo', {}).get('ratingsCount', 0))
-            book_info=best_match.get('volumeInfo',{})
-            images=book_info.get("imageLinks",{}).get('thumbnail')
-            features={
-                "title":book_info.get("title"),
-                "image":images,
-                "engagement":int(book_info.get('ratingsCount',0)),
-                "author":book_info.get('authors',[]),
-                "score":book_info.get('averageRating',''),
-                "media_type":"book"
-            }
-            return features
-        else:
-            return {"error":"Book not found"}
-    else:
-        return {"error": f"API request failed with status code {response.status_code}"}
     
-if __name__ == "__main__":
-    print("Testing a mainstream movie:")
-    print(get_book_data("The Hobbit"))
+    query = book_name.replace(" ", "+")
+    url = f"https://www.googleapis.com/books/v1/volumes?q=intitle:{query}&key={api_key}"
     
-    print("\nTesting a more niche movie:")
-    
-    print(get_book_data("Harry Potter"))
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            data = response.json()
+            results = data.get('items', [])
+            if results:
+                
+                best_match = max(results, key=lambda x: x.get('volumeInfo', {}).get('ratingsCount', 0))
+                book_info = best_match.get('volumeInfo', {})
+                
+            
+                authors = book_info.get('authors', ["Unknown Author"])
+                author_name = authors[0] if authors else "Unknown Author"
+                
+            
+                img_links = book_info.get("imageLinks", {})
+                image = img_links.get('thumbnail') or img_links.get('smallThumbnail')
+                if image:
+                    image = image.replace("http://", "https://")
+                
+                return {
+                    "title": book_info.get("title", "Unknown Title"),
+                    "image": image,
+                    "engagement": int(book_info.get('ratingsCount', 0)),
+                    "author": author_name,
+                    "score": book_info.get('averageRating', 0),
+                    "media_type": "book"
+                }
+            return {"error": "Book not found"}
+        return {"error": f"API request failed: {response.status_code}"}
+    except Exception as e:
+        return {"error": str(e)}
