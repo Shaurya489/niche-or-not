@@ -1,4 +1,7 @@
 import streamlit as st
+import os
+from dotenv import load_dotenv
+load_dotenv()
 from data_fetchers.anime_api import get_anime_data
 from data_fetchers.movie_api import get_movie_data
 from data_fetchers.movie_api import get_show_data
@@ -29,6 +32,8 @@ if(st.button("Check Niche-ness")):
         elif(media_type=="Book"):
             data=get_book_data(search_term) 
             st.write("DEBUG:", data)
+            if not os.getenv("BOOKS_API"):
+                st.error("DEBUG: The BOOKS_API key is NOT being read from Secrets!")
         if "error" not in data:     
             st.markdown(f"""
                         <style>
