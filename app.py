@@ -32,8 +32,6 @@ if(st.button("Check Niche-ness")):
         elif(media_type=="Book"):
             data=get_book_data(search_term) 
             st.write("DEBUG:", data)
-            if not os.getenv("BOOKS_API"):
-                st.write("DEBUG: The BOOKS_API key is NOT being read from Secrets!")
         if "error" not in data:     
             st.markdown(f"""
                         <style>
