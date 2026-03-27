@@ -1,7 +1,7 @@
 import requests
 
 def get_book_data(book_name):
-    url=f"https://openlibrary.org/search.json?q={book_name.replace(' ', '+')}"
+    url=f"https://openlibrary.org/search.json?q={book_name.replace(' ', '+')}&limit=5"
     
     response=requests.get(url)
     
