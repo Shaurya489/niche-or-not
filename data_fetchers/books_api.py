@@ -15,7 +15,7 @@ def get_book_data(book_name):
                 "title":book_info.get("title"),
                 "image":images,
                 "engagement":int(book_info.get('ratingsCount',0)),
-                "author":book_info.get('authors',[])[0],
+                "author":book_info.get('authors',[]),
                 "score":book_info.get('averageRating',''),
                 "media_type":"book"
             }

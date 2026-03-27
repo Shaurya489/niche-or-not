@@ -28,6 +28,7 @@ if(st.button("Check Niche-ness")):
             data=get_artist_data(search_term)
         elif(media_type=="Book"):
             data=get_book_data(search_term) 
+            st.write("DEBUG:", data)
         if "error" not in data:     
             st.markdown(f"""
                         <style>
