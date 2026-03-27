@@ -9,16 +9,16 @@ def classify_media(data):
             return "Mainstream"
         elif(1000000<=engagement<2000000):
             return "Popular"
-        elif(100000<=engagement<1000000):
+        elif(500000<=engagement<1000000):
             return "Lesser Known"
         else:
             return "Niche"
     elif media_type=="movie":
         if(engagement>=30000):
             return "Mainstream"
-        elif(5000<=engagement<30000):
+        elif(15000<=engagement<30000):
             return "Popular"
-        elif(1000<=engagement<5000):
+        elif(5000<=engagement<15000):
             return "Lesser Known"
         else:
             return "Niche"
@@ -35,9 +35,9 @@ def classify_media(data):
     elif media_type=="music":
         if(engagement>=2000000):
             return "Mainstream"
-        elif(500000<=engagement<2000000):
+        elif(1000000<=engagement<2000000):
             return "Popular"
-        elif(100000<=engagement<500000):
+        elif(500000<=engagement<1000000):
             return "Lesser Known"
         else:
             return "Niche"
