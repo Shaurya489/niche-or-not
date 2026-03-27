@@ -1,7 +1,5 @@
 import streamlit as st
-import os
-from dotenv import load_dotenv
-load_dotenv()
+
 from data_fetchers.anime_api import get_anime_data
 from data_fetchers.movie_api import get_movie_data
 from data_fetchers.movie_api import get_show_data
@@ -31,7 +29,7 @@ if(st.button("Check Niche-ness")):
             data=get_artist_data(search_term)
         elif(media_type=="Book"):
             data=get_book_data(search_term) 
-            st.write("DEBUG:", data)
+            
         if "error" not in data:     
             st.markdown(f"""
                         <style>
