@@ -3,13 +3,14 @@ from data_fetchers.anime_api import get_anime_data
 from data_fetchers.movie_api import get_movie_data
 from data_fetchers.movie_api import get_show_data
 from data_fetchers.spotify_api import get_artist_data
+from data_fetchers.books_api import get_book_data
 from core.classifier import classify_media
 
 st.set_page_config(page_title="Niche or Not")
 st.title("Niche or Not")
 st.write("Is your taste truly niche like you claim?")
 
-media_type=st.selectbox("What are you looking for?",["Anime","Movie","TV Show","Artist/Band"])
+media_type=st.selectbox("What are you looking for?",["Anime","Movie","TV Show","Artist/Band","Book"])
 
 search_term=st.text_input(f"Enter the name of the {media_type}:")
 data={}
@@ -25,7 +26,8 @@ if(st.button("Check Niche-ness")):
             data=get_show_data(search_term)
         elif(media_type=="Artist/Band"):
             data=get_artist_data(search_term)
-            
+        elif(media_type=="Book"):
+            data=get_book_data(search_term) 
         if "error" not in data:     
             st.markdown(f"""
                         <style>
@@ -74,10 +76,13 @@ if(st.button("Check Niche-ness")):
             with col2:
                 st.subheader(data['title'])
                 st.write(f"Verdict : {verdict}")
-                if(media_type!="Artist/Band"):
+                if(media_type=="Book"):
+                    st.write(f" Score: {data['score']}/5")
+                    st.write(f"Author: {data['author']}")
+                if(media_type!="Artist/Band" and media_type!="Book"):
                     st.write(f" Score: {data['score']}/10")
         else:
-            st.write(f"Error!! {media_type} not found")
+            st.warning(f"{media_type} not found")
     else:
         st.warning("Please enter something")
 
