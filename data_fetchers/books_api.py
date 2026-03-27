@@ -1,9 +1,11 @@
 import requests
 
 def get_book_data(book_name):
-    
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
     url=f"https://www.googleapis.com/books/v1/volumes?q=intitle:{book_name}"
-    response=requests.get(url)
+    response=requests.get(url,headers=headers)
     if(response.status_code==200):
         data=response.json()
         results=data.get('items',[])
