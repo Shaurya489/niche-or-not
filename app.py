@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 from data_fetchers.anime_api import get_anime_data
 from data_fetchers.movie_api import get_movie_data
 from data_fetchers.movie_api import get_show_data
@@ -8,9 +9,45 @@ from data_fetchers.books_api import get_book_data
 from core.classifier import classify_media
 from core.classifier import normalize
 
+st.markdown(f"""
+            <style>
+            .stApp{{
+                background:transparent;
+            }}
+            @keyframes fadeIn{{
+                0% {{ opacity:0;}}
+                100% {{ opacity:1}}
+            }}
+            
+            .popout-bg{{
+                position:fixed;
+                top:0;
+                left:0;
+                width:100vw;
+                height:100vh;
+                background-image:url("https://w.wallhaven.cc/full/6l/wallhaven-6l5emq.png");
+                background-size:cover;
+                background-position:center;
+                filter:blur(10px) brightness(0.4);
+                z-index:-1;
+                animation:fadeIn 0.8s ease-in-out;
+            }}
+            
+            .main-content{{
+                animation:fadeIn 1.2s ease-in-out;
+            }}
+            h1,h2,h3,p{{
+                color: #f0f0f0;
+                text-shadow:2px 2px 4px rgba(0,0,0,0.5);
+            }}
+            
+            </style>
+            <div class="popout-bg"></div>
+            
+            """,unsafe_allow_html=True) 
+
 st.set_page_config(page_title="Niche or Not")
 st.title("Niche or Not")
-st.write("Is your taste truly niche like you claim?")
 
 media_type=st.selectbox("What are you looking for?",["Anime","Movie","TV Show","Artist/Band","Book"])
 
@@ -78,7 +115,7 @@ if(st.button("Check Niche-ness")):
                 if data.get("image"):
                     st.image(data["image"],width='stretch')
                 else:
-                    st.write("No Image found")
+                    st.write("Image not found")
             with col2:
                 st.subheader(data['title'])
                 st.write(f"Verdict : {verdict}")
@@ -101,7 +138,10 @@ if(st.button("Check Niche-ness")):
             st.warning(f"{media_type} not found")
     else:
         st.warning("Please enter something")
-
+else:
+    st.divider()
+    st.info("Pick a category and search above to test your taste")
+    
 with st.sidebar:
     st.write("Made by Shaurya Pratap Singh")
     st.write("Contact : shauryapratapsingh489@gmail.com")
