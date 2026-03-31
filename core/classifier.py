@@ -53,7 +53,20 @@ def classify_media(data):
     
     else:
         return "Unknown media type."
+
+def normalize(engagement,media_type):
+    max_values={
+        "Movie":30000,
+        "Tv Show":15000,
+        "Anime":2500000,
+        "Artist/Band":5000000,
+        "Book":5000
+    }
+    upper_limit=max_values.get(media_type,1000)
+    normalized_score=(engagement/upper_limit)*100
     
+    return min(float(normalized_score),100.0)
+
 if(__name__=="__main__"):
     from data_fetchers.movie_api import get_movie_data
     
