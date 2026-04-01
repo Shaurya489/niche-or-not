@@ -57,7 +57,7 @@ def classify_media(data):
 def normalize(engagement,media_type):
     max_values={
         "Movie":30000,
-        "Tv Show":15000,
+        "TV Show":15000,
         "Anime":2500000,
         "Artist/Band":5000000,
         "Book":5000
