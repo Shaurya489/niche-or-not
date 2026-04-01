@@ -9,6 +9,7 @@ from data_fetchers.books_api import get_book_data
 from core.classifier import classify_media
 from core.classifier import normalize
 
+
 st.markdown(f"""
             <style>
             .stApp{{
@@ -133,6 +134,7 @@ if(st.button("Check Niche-ness")):
                 st.info("Cultured")
             else:
                 st.warning("Mainstream")
+                
             
         else:
             st.warning(f"{media_type} not found")
@@ -145,5 +147,4 @@ else:
 with st.sidebar:
     st.write("Made by Shaurya Pratap Singh")
     st.write("Contact : shauryapratapsingh489@gmail.com")
-    st.write("Used TMDB,Jikan,OpenLibrary,lastFM,Deezer APIs")
 
