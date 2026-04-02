@@ -133,7 +133,7 @@ if(st.button("Check Niche-ness")):
             elif(niche_meter>50):
                 st.info("Cultured")
             else:
-                st.warning("Mainstream")
+                st.warning("Not Niche")
                 
             
         else:
